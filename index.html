@@ -10,6 +10,10 @@
     </style>
   </head>
   <body>
+    <a
+      href="intent://arvr.google.com/scene-viewer/1.0?file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;"
+      >Avocado</a
+    >
     <script src="js/three.js"></script>
     <script>
       // Our Javascript will go here.
@@ -38,7 +42,14 @@
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
       }
-      animate();
+
+      // animate();
+
+      function isAvailable() {
+        const WEBXR_SUPPORTED = navigator.xr && navigator.xr.isSessionSupported;
+        if (!WEBXR_SUPPORTED) return Promise.resolve(false);
+        return navigator.xr.isSessionSupported("immersive-ar");
+      }
     </script>
   </body>
 </html>
