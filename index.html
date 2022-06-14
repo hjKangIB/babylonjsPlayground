@@ -1,55 +1,35 @@
-<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <title>My first three.js app</title>
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
   </head>
-  <body>
-    <a
-      href="intent://arvr.google.com/scene-viewer/1.0?file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;"
-      >Avocado</a
-    >
-    <script src="js/three.js"></script>
-    <script>
-      // Our Javascript will go here.
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
 
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
-
-      camera.position.z = 5;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-      }
-
-      // animate();
-
-      function isAvailable() {
-        const WEBXR_SUPPORTED = navigator.xr && navigator.xr.isSessionSupported;
-        if (!WEBXR_SUPPORTED) return Promise.resolve(false);
-        return navigator.xr.isSessionSupported("immersive-ar");
-      }
-    </script>
-  </body>
+  <!-- Use it like any other HTML element -->
+  <model-viewer
+    alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
+    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp"
+    seamless-poster
+    shadow-intensity="1"
+    camera-controls
+    enable-pan
+  ></model-viewer>
+  <model-viewer
+    src="http://raw.githubusercontent.com/german-alvarez-dev/workshop-webvr-aframe/master/ship/scene_ship.gltf"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    auto-rotate
+    camera-controls
+    enable-pan
+    style="width: 400px; height: 400px"
+  >
+  </model-viewer>
 </html>
